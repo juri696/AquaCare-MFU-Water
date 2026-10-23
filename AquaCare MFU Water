@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AquaCare MFU</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;600;700&family=Noto+Serif+Thai:wght@600;700&display=swap">
+<style>
+:root{--bg:#F6F3F1;--card:#fff;--ink:#2A1517;--mute:#6B5558;--line:#E6DCD9;--red:#9B1B30;--rink:#fff;--gold:#C9A227;--gsoft:#FBF0CC;--gink:#6B4E00;--ok:#1E7B46;--bad:#B3122E;--head:#7E1526;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#170E10;--card:#241719;--ink:#F4EAE6;--mute:#BFA9AB;--line:#3A2A2D;--red:#E0566B;--rink:#1A0A0D;--gold:#E3B341;--gsoft:#3A2F10;--gink:#F0CF73;--ok:#5BCB8A;--bad:#FF7A8E;--head:#4A1019}}
+:root[data-theme="dark"]{--bg:#170E10;--card:#241719;--ink:#F4EAE6;--mute:#BFA9AB;--line:#3A2A2D;--red:#E0566B;--rink:#1A0A0D;--gold:#E3B341;--gsoft:#3A2F10;--gink:#F0CF73;--ok:#5BCB8A;--bad:#FF7A8E;--head:#4A1019}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 "Noto Sans Thai",system-ui,sans-serif}
+header{background:var(--head);color:#FBEFD0;border-bottom:4px solid var(--gold);padding:18px 20px 14px}
+.in{max-width:1200px;margin:0 auto}
+.hr{display:flex;justify-content:space-between;align-items:center;gap:12px}
+h1{margin:0;font:700 24px "Noto Serif Thai",Georgia,serif;letter-spacing:.2px}
+header p{margin:2px 0 0;font-size:14px;opacity:.9}
+.tag{background:var(--gold);color:#3A2A00;font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px}
+.shell{max-width:1200px;margin:0 auto}main{padding:16px 16px 100px;min-width:0}.g{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}.g.w{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}.k b{display:block;font:700 26px "Noto Serif Thai",Georgia,serif}.k small{color:var(--mute);font-size:13px}.demo{background:var(--gsoft);color:var(--gink);font-size:12px;font-weight:700;padding:2px 8px;border-radius:99px;white-space:nowrap}.row2{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+section{display:flex;flex-direction:column;gap:12px}
+section[hidden]{display:none}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.card h2{margin:0 0 6px;font:700 17px "Noto Serif Thai",Georgia,serif}
+.big{font:700 22px "Noto Serif Thai",Georgia,serif;margin:2px 0}
+.mute{color:var(--mute);font-size:14px}
+.row{display:flex;gap:10px}
+.m{flex:1;min-width:0}
+.m small{display:block;color:var(--mute);font-size:12px}
+.m b{font:700 22px "Noto Serif Thai",Georgia,serif}
+.st{font-weight:700;font-size:14px}
+.ok{color:var(--ok)}.warn{color:var(--gink)}.bad{color:var(--bad)}
+.pt{display:flex;flex-direction:column;gap:10px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.badge{padding:3px 10px;border-radius:99px;font-size:13px;font-weight:700;background:var(--gsoft);color:var(--gink)}
+.badge.bad{background:var(--bad);color:var(--card)}
+.alert{border-left:6px solid var(--red)}
+.alert.done{border-left-color:var(--line);opacity:.92}
+.alert.open{border-left-color:var(--bad)}
+button,select,input{font:inherit;color:inherit}
+.btn{min-height:48px;padding:0 16px;border-radius:12px;border:2px solid var(--red);background:var(--red);color:var(--rink);font-weight:700;cursor:pointer}
+.btn.alt{background:transparent;color:var(--red)}
+.btns{display:flex;gap:8px;flex-wrap:wrap}.btns .btn{flex:1}
+.chips{display:flex;gap:8px}
+.chip{flex:1;min-height:44px;border-radius:99px;border:2px solid var(--line);background:var(--card);font-weight:600;cursor:pointer}
+.chip[aria-pressed="true"]{border-color:var(--gold);background:var(--gsoft);color:var(--gink)}
+label{display:block;font-size:14px;color:var(--mute);margin-top:8px}
+input,select{width:100%;min-height:46px;border-radius:10px;border:1px solid var(--line);background:var(--bg);padding:0 12px}
+nav{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);display:flex;overflow-x:auto;padding-bottom:env(safe-area-inset-bottom,0px)}
+nav button{flex:1 0 92px;min-height:60px;border:0;background:none;font-size:14px;color:var(--mute);cursor:pointer;position:relative}
+nav button[aria-current="page"]{color:var(--red);font-weight:700;box-shadow:inset 0 4px 0 var(--gold)}
+.dot{position:absolute;top:8px;margin-left:6px;background:var(--bad);color:var(--card);border-radius:99px;font-size:11px;min-width:18px;padding:0 5px}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+svg{display:block;width:100%;height:auto}
+.ln{fill:none;stroke:var(--red);stroke-width:2.5}.fc{fill:none;stroke:var(--gold);stroke-width:3;stroke-dasharray:6 5}.th{stroke:var(--bad);stroke-dasharray:4 4;stroke-width:1.5}
+.sv{fill:var(--mute);font-size:11px}
+@media(min-width:900px){.shell{display:grid;grid-template-columns:240px 1fr}nav{grid-column:1;grid-row:1;position:sticky;top:16px;bottom:auto;align-self:start;flex-direction:column;overflow:visible;margin:16px 0 0 16px;border:1px solid var(--line);border-radius:14px;padding:8px}main{grid-column:2;grid-row:1;padding-bottom:32px}nav button{flex:none;text-align:left;border-radius:10px;padding:0 14px;min-height:48px}nav button[aria-current="page"]{box-shadow:inset 4px 0 0 var(--gold);background:var(--gsoft)}}
+</style>
+</head>
+<body>
+<header><div class="in"><div class="hr"><h1>AquaCare MFU</h1><div style="display:flex;gap:8px;align-items:center"><span class="tag" data-i="tag">โหมดจำลอง</span><select id="lang" aria-label="ภาษา / Language" style="width:auto;min-height:36px;background:var(--card);color:var(--ink)"><option value="th">ไทย</option><option value="en">English</option><option value="my">မြန်မာ</option><option value="zh">中文</option><option value="ko">한국어</option><option value="ja">日本語</option><option value="id">Bahasa Indonesia</option><option value="km">ខ្មែរ</option></select></div></div><p data-i="tagline">AI เฝ้าระวังคุณภาพน้ำในหอพักนักศึกษาและพื้นที่ส่วนกลาง มหาวิทยาลัยแม่ฟ้าหลวง</p></div></header>
+<div class="shell"><main>
+<section id="p-home"></section><section id="p-list" hidden></section>
+<section id="p-alerts" hidden></section>
+<section id="p-fc" hidden></section>
+<section id="p-lab" hidden>
+<div class="card"><h2 data-i="labCtl">ควบคุมการจำลอง</h2><div class="btns"><button class="btn alt" data-a="play" id="playBtn" data-i="pause">หยุดชั่วคราว</button><button class="btn alt" data-a="reset" data-i="reset">ล้างข้อมูลและเริ่มใหม่</button></div></div>
+<div class="card"><h2 data-i="injT">จำลองน้ำขุ่นผิดปกติ</h2><div id="injBox"></div><div class="btns" style="margin-top:12px"><button class="btn" data-a="inj" data-i="injB">เริ่มเหตุการณ์น้ำขุ่น</button></div></div>
+<div class="card"><h2 data-i="manT">ใส่ค่าที่วัดเอง</h2><div id="mpBox"></div><label for="mt"><span data-i="turb">ความขุ่น</span> (NTU)</label><input id="mt" type="number" step="0.1" value="2.0" inputmode="decimal"><label for="mph">pH</label><input id="mph" type="number" step="0.1" value="7.2" inputmode="decimal"><label for="mtemp" data-i="temp">อุณหภูมิ (°C)</label><input id="mtemp" type="number" step="0.1" value="26" inputmode="decimal"><div class="btns" style="margin-top:12px"><button class="btn" data-a="add" data-i="addB">เพิ่มค่าและตรวจสอบ</button></div><p id="msg" class="mute" role="status" aria-live="polite" style="margin:8px 0 0"></p></div>
+</section>
+</main>
+<nav aria-label="เมนูหลัก">
+<button data-a="tab" data-v="home" aria-current="page"><span data-i="home">ภาพรวม</span></button>
+<button data-a="tab" data-v="dorm"><span data-i="dorm">หอพักนักศึกษา</span></button>
+<button data-a="tab" data-v="food"><span data-i="food">โรงอาหาร</span></button>
+<button data-a="tab" data-v="central"><span data-i="central">ระบบน้ำส่วนกลาง</span></button>
+<button data-a="tab" data-v="fc"><span data-i="fc">คาดการณ์ด้วย AI</span></button>
+<button data-a="tab" data-v="alerts"><span data-i="alerts">แจ้งเตือน</span><span class="dot" id="dot" hidden></span></button>
+<button data-a="tab" data-v="lab"><span data-i="lab">ตั้งค่าและทดลอง</span></button>
+</nav></div>
+<script>
+const TH=5;
+const PTS=[];
+const S={play:true,tick:0,sel:'B',tab:'home',lang:'th',listFor:'',data:{},open:{},calm:{},boost:{},mute:{},z:{},alerts:[]};
+const CATS={dorm:{get n(){return t('cDorm')}},food:{get n(){return t('cFood')}},central:{get n(){return t('cCentral')}}};
+const LBL={get ok(){return t('ok')},get warn(){return t('warn')},get bad(){return t('bad')}};
+const R=[];const add=(c,g,ns)=>ns.forEach(n=>R.push({c,g,n}));
+add('dorm','กลุ่ม F',[1,2,3,4,5,6].map(i=>'F'+i));
+add('dorm','กลุ่มลำดวน',[1,2,3,4,5,6,7].map(i=>'ลำดวน '+i));
+add('dorm','กลุ่มสักทอง',[1,2,3].map(i=>'สักทอง '+i));
+add('dorm','หอพักชื่อเฉพาะ',['หอพักประเสริฐฯ','หอพักบุญทรงฯ','หอพัก พล.ต.อ.เภาฯ','หอพักนักศึกษานานาชาติ']);
+add('food','ศูนย์อาหารและจุดจำหน่าย',['ศูนย์อาหาร D1','ศูนย์อาหาร E1','ศูนย์อาหาร E2','ศูนย์อาหาร C5','พื้นที่จำหน่ายอาหารและเครื่องดื่ม S2','ครัวลำดวน','ครัวมายมัม','จุดจำหน่ายอาหารบริเวณสระว่ายน้ำ','ศูนย์อาหาร E-Park','ห้องอาหารโรงพยาบาลมหาวิทยาลัยแม่ฟ้าหลวง','เรือนริมน้ำ']);
+R.forEach((x,i)=>{if(x.c==='dorm')[1,2,3,4].forEach(f=>PTS.push({id:'d'+i+'-'+f,loc:x.n,fl:f,get n(){return dn(this.loc)+' · '+t('rest')+' '+this.fl}}));else if(x.c==='food')PTS.push({id:'f'+i,loc:x.n,fl:0,get n(){return dn(this.loc)}});});
+const $=id=>document.getElementById(id);
+const rnd=()=>Math.random()+Math.random()+Math.random()-1.5;
+const LOC={th:'th-TH',en:'en-GB',my:'my-MM',zh:'zh-CN',ko:'ko-KR',ja:'ja-JP',id:'id-ID',km:'km-KH'};const lc=()=>LOC[S.lang]+'-u-nu-latn';const clock=x=>new Date(x).toLocaleTimeString(lc(),{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+function save(){try{localStorage.setItem('aquacare.alerts',JSON.stringify(S.alerts.slice(0,50)))}catch(e){}}
+function load(){try{return JSON.parse(localStorage.getItem('aquacare.alerts')||'[]')}catch(e){return[]}}
+function gen(id,k){
+  const h=[...id].reduce((s,c)=>s+c.charCodeAt(0),0),o=1.8+(h%5)/10;
+  let turb=o+0.25*Math.sin(k/9+h)+rnd()*0.12,ph=7.2+rnd()*0.05+(h%3)*-0.05,tp=26+0.4*Math.sin(k/20)+rnd()*0.1;
+  if(S.boost[id]>0){turb+=1.6+(10-S.boost[id])*0.2;S.boost[id]--;}
+  return{t:Date.now(),turb:Math.max(0,turb),ph,tp};
+}
+function stat(a){const m=a.reduce((s,v)=>s+v,0)/a.length;return[m,Math.sqrt(a.reduce((s,v)=>s+(v-m)**2,0)/a.length)];}
+function detect(id){
+  const a=S.data[id];if(a.length<20)return;
+  const cur=a[a.length-1],w=a.slice(-31,-1);
+  const[mt,st]=stat(w.map(r=>r.turb)),[mp,sp]=stat(w.map(r=>r.ph));
+  const zt=(cur.turb-mt)/Math.max(st,.1),zp=(cur.ph-mp)/Math.max(sp,.05);
+  const z=Math.max(Math.abs(zt),Math.abs(zp));S.z[id]=z;
+  if(S.open[id]){if(z<2){S.calm[id]=(S.calm[id]||0)+1;if(S.calm[id]>=3){S.open[id]=null;S.calm[id]=0;}}else S.calm[id]=0;return;}
+  if(z>=4&&S.tick>=(S.mute[id]||0)){
+    const isT=Math.abs(zt)>=Math.abs(zp);
+    const al={uid:Date.now()+id,id,t:Date.now(),kind:isT?'turb':'ph',from:isT?mt:mp,to:isT?cur.turb:cur.ph,score:Math.min(1,z/8),fixed:cur.turb>TH,status:'open'};
+    S.alerts.unshift(al);S.open[id]=al.uid;save();
+  }
+}
+function addReading(id,r){const a=S.data[id];a.push(r);if(a.length>150)a.shift();detect(id);}
+function fit(v){const n=v.length;let sx=0,sy=0,sxy=0,sxx=0;v.forEach((y,x)=>{sx+=x;sy+=y;sxy+=x*y;sxx+=x*x;});const m=(n*sxy-sx*sy)/(n*sxx-sx*sx||1);return{m,b:(sy-m*sx)/n};}
+function forecast(id){
+  const v=S.data[id].map(r=>r.turb),seg=v.slice(-20),f=fit(seg),n=seg.length,pred=[];
+  for(let h=1;h<=12;h++)pred.push(Math.max(0,f.b+f.m*(n-1+h)));
+  let eta=pred.findIndex(p=>p>TH);
+  let mae=null;if(v.length>=32){let e=0;for(let i=v.length-10;i<v.length;i++){const g=fit(v.slice(i-20,i));e+=Math.abs(v[i]-(g.b+g.m*20));}mae=e/10;}
+  return{pred,slope:f.m,eta:eta<0?null:eta+1,mae};
+}
+function status(id){
+  if(S.open[id])return{c:'bad',t:'วิกฤต'};
+  if((S.z[id]||0)>=3.2||forecast(id).eta)return{c:'warn',t:'เฝ้าระวัง'};
+  return{c:'ok',t:'ปกติ'};
+}
+function chart(vals,pred){
+  const W=340,H=170,p=8,n=vals.length,tot=n-1+pred.length;
+  const mx=Math.max(TH+1,...vals,...pred)*1.05;
+  const X=i=>p+i*(W-2*p)/tot,Y=v=>H-20-(v/mx)*(H-34);
+  const h=vals.map((v,i)=>X(i).toFixed(1)+','+Y(v).toFixed(1)).join(' ');
+  const f=[vals[n-1],...pred].map((v,i)=>X(n-1+i).toFixed(1)+','+Y(v).toFixed(1)).join(' ');
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${t('turb')}"><line class="th" x1="0" x2="${W}" y1="${Y(TH)}" y2="${Y(TH)}"/><text class="sv" x="4" y="${Y(TH)-5}">${TH} NTU</text><polyline class="ln" points="${h}"/><polyline class="fc" points="${f}"/></svg>`;
+}
+const K='home dorm food central fc alerts lab ok warn bad kPlaces kOff kLast cDorm cFood cCentral detail demo recent all trend search tag tagline rest loc'.split(' ');
+const I={
+th:'ภาพรวม|หอพักนักศึกษา|โรงอาหาร|ระบบน้ำส่วนกลาง|คาดการณ์ด้วย AI|แจ้งเตือน|ตั้งค่าและทดลอง|ปกติ|เฝ้าระวัง|วิกฤต|พื้นที่ที่มีจุดตรวจวัด|เซนเซอร์ออฟไลน์/ล้าสมัย|ข้อมูลล่าสุด|หอพักนักศึกษา|โรงอาหารและจุดจำหน่ายอาหาร|ระบบน้ำส่วนกลางและพื้นที่อื่น ๆ|ดูรายละเอียด|ข้อมูลจำลอง|การแจ้งเตือนล่าสุด|ดูทั้งหมด|แนวโน้มความขุ่น (ย่อ)|ค้นหา|โหมดจำลอง|AI เฝ้าระวังคุณภาพน้ำในหอพักนักศึกษาและพื้นที่ส่วนกลาง มหาวิทยาลัยแม่ฟ้าหลวง|ห้องน้ำชั้น|สถานที่',
+en:'Overview|Dormitories|Canteens|Central water system|AI forecast|Alerts|Settings & demo|Normal|Watch|Critical|Areas with monitoring points|Sensors offline/stale|Latest data|Student dormitories|Canteens & food outlets|Central water system & other areas|View details|Simulated data|Latest alerts|View all|Turbidity trend (mini)|Search|Demo mode|AI water quality monitoring for dormitories and shared areas, Mae Fah Luang University|Restroom floor|Location',
+my:'ခြုံငုံသုံးသပ်ချက်|ကျောင်းသားအဆောင်များ|စားသောက်ဆိုင်|ဗဟိုရေစနစ်|AI ခန့်မှန်းချက်|သတိပေးချက်များ|ဆက်တင်နှင့် စမ်းသပ်ရန်|ပုံမှန်|စောင့်ကြည့်ရန်|အရေးပေါ်|စောင့်ကြည့်ရေးအမှတ်ရှိသော နေရာများ|ချိတ်ဆက်မှုမရှိသော/ဟောင်းနွမ်းသော အာရုံခံကိရိယာ|နောက်ဆုံးဒေတာ|ကျောင်းသားအဆောင်များ|စားသောက်ဆိုင်နှင့် အစားအစာရောင်းချရာနေရာများ|ဗဟိုရေစနစ်နှင့် အခြားနေရာများ|အသေးစိတ်ကြည့်ရန်|စမ်းသပ်ဒေတာ|နောက်ဆုံး သတိပေးချက်များ|အားလုံးကြည့်ရန်|ရေနောက်ကျိမှု အလားအလာ (အကျဉ်း)|ရှာဖွေရန်|စမ်းသပ်မုဒ်|မဲဖလူးလျန်တက္ကသိုလ် ကျောင်းသားအဆောင်နှင့် ဘုံနေရာများအတွက် AI ရေအရည်အသွေး စောင့်ကြည့်ရေး|အိမ်သာ အလွှာ|တည်နေရာ',
+zh:'总览|学生宿舍|食堂|中央供水系统|AI预测|警报|设置与演示|正常|关注|严重|有监测点的区域|离线/过期传感器|最新数据|学生宿舍|食堂及餐饮点|中央供水系统及其他区域|查看详情|模拟数据|最新警报|查看全部|浊度趋势(简图)|搜索|演示模式|湄法銮大学宿舍及公共区域AI水质监测|卫生间楼层|地点',
+ko:'개요|학생 기숙사|식당|중앙 급수 시스템|AI 예측|알림|설정 및 데모|정상|주의|위험|측정 지점이 있는 구역|오프라인/오래된 센서|최근 데이터|학생 기숙사|식당 및 음식 판매점|중앙 급수 시스템 및 기타 구역|상세 보기|모의 데이터|최근 알림|전체 보기|탁도 추이(요약)|검색|데모 모드|매파루앙대학교 기숙사 및 공용 구역 AI 수질 감시|화장실 층|장소',
+ja:'概要|学生寮|食堂|中央給水システム|AI予測|アラート|設定とデモ|正常|注意|危険|観測地点のあるエリア|オフライン/古いセンサー|最新データ|学生寮|食堂・飲食提供場所|中央給水システムとその他のエリア|詳細を見る|模擬データ|最新のアラート|すべて見る|濁度の推移(簡易)|検索|デモモード|メーファールアン大学の学生寮と共用エリアのAI水質監視|トイレ階|場所',
+id:'Ringkasan|Asrama mahasiswa|Kantin|Sistem air pusat|Prakiraan AI|Peringatan|Pengaturan & demo|Normal|Waspada|Kritis|Area dengan titik pemantauan|Sensor offline/usang|Data terbaru|Asrama mahasiswa|Kantin & tempat penjualan makanan|Sistem air pusat & area lain|Lihat detail|Data simulasi|Peringatan terbaru|Lihat semua|Tren kekeruhan (ringkas)|Cari|Mode demo|Pemantauan kualitas air berbasis AI untuk asrama dan area bersama, Universitas Mae Fah Luang|Toilet lantai|Lokasi',
+km:'ទិដ្ឋភាពទូទៅ|អន្តេវាសិកដ្ឋាននិស្សិត|អាហារដ្ឋាន|ប្រព័ន្ធទឹកកណ្តាល|ការព្យាករណ៍ AI|ការជូនដំណឹង|ការកំណត់ និងសាកល្បង|ធម្មតា|ត្រូវតាមដាន|ធ្ងន់ធ្ងរ|តំបន់ដែលមានចំណុចត្រួតពិនិត្យ|ឧបករណ៍ចាប់សញ្ញាក្រៅបណ្តាញ/ហួសសម័យ|ទិន្នន័យចុងក្រោយ|អន្តេវាសិកដ្ឋាននិស្សិត|អាហារដ្ឋាន និងកន្លែងលក់អាហារ|ប្រព័ន្ធទឹកកណ្តាល និងតំបន់ផ្សេងៗ|មើលលម្អិត|ទិន្នន័យក្លែងធ្វើ|ការជូនដំណឹងចុងក្រោយ|មើលទាំងអស់|និន្នាការភាពល្អក់ (សង្ខេប)|ស្វែងរក|ម៉ូដសាកល្បង|ការត្រួតពិនិត្យគុណភាពទឹកដោយ AI សម្រាប់អន្តេវាសិកដ្ឋាន និងតំបន់រួម សាកលវិទ្យាល័យមេហ្វាលួង|បន្ទប់ទឹកជាន់|ទីតាំង'};
+Object.keys(I).forEach(k=>I[k]=I[k].split('|'));
+const K2="note rDorm hasPts rFood onl chk cNone aOpen aReal aFalse turb noAl listNote noReg phName noPt noItem sOn gF gL gS gN gFd wDm wFc wFb wKit wPool wHosp wRiver wIntl abn nv score fixed fyes fno sum total prec noData up down flat etaY etaN mae labCtl pause resume reset injT injB injing manT temp addB m1 m2 m3 ntT nt7 ntL ntI ntD ntS e1 e2 saved noN work annAt ahead days del".split(' ');K.push(...K2);
+const I2={th:"ตัวเลขคำนวณจากจุดตรวจวัดสาธิต ยังไม่มีเซนเซอร์จริงที่ยืนยันแล้ว|ทะเบียนหอพัก (รอตรวจสอบ)|มีจุดตรวจวัด|สถานที่ที่ลงทะเบียน|จุดตรวจวัดที่ออนไลน์|ต้องตรวจสอบเพิ่มเติม|ยังไม่มีทะเบียนจุดตรวจวัด รอข้อมูลที่ยืนยันจากมหาวิทยาลัย|ต้องตรวจสอบ|ปัญหาจริง|เตือนผิดพลาด|ความขุ่น|ยังไม่มีการแจ้งเตือน|รายชื่อเริ่มต้น ต้องยืนยันกับข้อมูลทางการของมหาวิทยาลัยก่อนใช้จริง|ยังไม่มีข้อมูลทะเบียน|พิมพ์ชื่อ|ยังไม่มีจุดตรวจวัด|ไม่พบรายการ|เซนเซอร์ออนไลน์|กลุ่ม F|กลุ่มลำดวน|กลุ่มสักทอง|หอพักชื่อเฉพาะ|ศูนย์อาหารและจุดจำหน่าย|หอพัก|ศูนย์อาหาร|พื้นที่อาหารและเครื่องดื่ม|ครัว|จุดจำหน่ายอาหารบริเวณสระว่ายน้ำ|ห้องอาหารโรงพยาบาลมหาวิทยาลัยแม่ฟ้าหลวง|เรือนริมน้ำ|หอพักนักศึกษานานาชาติ|เปลี่ยนผิดปกติ|ค่าปกติ|คะแนนผิดปกติ|เกณฑ์ตายตัว|เตือนด้วยเช่นกัน|ยังไม่เตือน|สรุปผลการตรวจสอบ|แจ้งเตือนทั้งหมด|ความแม่นยำ (precision)|ยังไม่มีข้อมูล|แนวโน้มสูงขึ้น|แนวโน้มลดลง|ค่าทรงตัว|คาดว่าความขุ่นอาจเกิน {0} NTU ภายใน {1} รอบการวัด|ยังไม่คาดว่าจะเกิน {0} NTU ใน 12 รอบถัดไป|ความคลาดเคลื่อนย้อนหลัง (MAE)|ควบคุมการจำลอง|หยุดชั่วคราว|เล่นต่อ|ล้างข้อมูลและเริ่มใหม่|จำลองน้ำขุ่นผิดปกติ|เริ่มเหตุการณ์น้ำขุ่น|กำลังจำลอง… ดูแท็บแจ้งเตือน|ใส่ค่าที่วัดเอง|อุณหภูมิ (°C)|เพิ่มค่าและตรวจสอบ|กรอกตัวเลขให้ครบ: ความขุ่น ≥ 0, pH 0–14|AI ตรวจพบความผิดปกติ ดูแท็บแจ้งเตือน|เพิ่มค่าแล้ว|ประกาศการแก้ไขระบบน้ำ|ต้องแจ้งล่วงหน้าอย่างน้อย 7 วัน|สถานที่ที่ได้รับผลกระทบ|ผลกระทบ|วันและเวลาที่แก้ไข|บันทึกประกาศ|กรอกสถานที่ ผลกระทบ และวันเวลาให้ครบ|ต้องแจ้งล่วงหน้าอย่างน้อย 7 วัน กรุณาเลือกวันเวลาใหม่|บันทึกประกาศแล้ว|ยังไม่มีประกาศ|แก้ไข|แจ้งเมื่อ|ล่วงหน้า|วัน|ลบ",en:"Numbers come from simulated demo points; no real sensors confirmed yet.|Dorm registry (to be verified)|With monitoring points|Registered places|Online monitoring points|Need further checking|No monitoring points registered; awaiting data confirmed by the university|To be checked|Real problem|False alarm|Turbidity|No alerts yet|Initial list; verify with official university data before real use|No registry data yet|Type a name|No monitoring points yet|No results|Sensors online|Group F|Lamduan group|Sakthong group|Named dormitories|Food centers & outlets|Dormitory|Food Center|Food & beverage area|Kitchen|Food outlet by the swimming pool|Mae Fah Luang University Hospital restaurant|Riverside House|International student dormitory|abnormal change|Normal value|Anomaly score|Fixed threshold|also alerts|not alerting yet|Review summary|Total alerts|Precision|No data yet|Trending up|Trending down|Stable|Turbidity may exceed {0} NTU within {1} readings|Not expected to exceed {0} NTU in the next 12 readings|Backtest error (MAE)|Simulation controls|Pause|Resume|Clear data and restart|Simulate abnormal turbidity|Start turbidity event|Simulating… see the Alerts tab|Enter your own readings|Temperature (°C)|Add reading and check|Fill in all numbers: turbidity ≥ 0, pH 0–14|AI detected an anomaly; see the Alerts tab|Reading added|Water system work notice|Must be announced at least 7 days in advance|Affected locations|Impact|Date and time of the work|Save notice|Fill in locations, impact and date/time|Must be at least 7 days ahead; choose a new date/time|Notice saved|No notices yet|Work|Announced|in advance|days|Delete",my:"ဂဏန်းများသည် စမ်းသပ်ဒေတာအမှတ်များမှ တွက်ချက်ထားခြင်းဖြစ်ပြီး အတည်ပြုထားသော အာရုံခံကိရိယာအစစ် မရှိသေးပါ|အဆောင်စာရင်း (စစ်ဆေးရန်ကျန်သည်)|စောင့်ကြည့်ရေးအမှတ်ရှိသည်|မှတ်ပုံတင်ထားသော နေရာများ|အွန်လိုင်းရှိ စောင့်ကြည့်ရေးအမှတ်များ|ထပ်မံစစ်ဆေးရန်လိုသည်|စောင့်ကြည့်ရေးအမှတ် မှတ်ပုံမတင်ရသေးပါ၊ တက္ကသိုလ်မှ အတည်ပြုဒေတာကို စောင့်ဆိုင်းနေသည်|စစ်ဆေးရန်လိုသည်|တကယ့်ပြဿနာ|အချက်ပြမှားယွင်းမှု|ရေနောက်ကျိမှု|သတိပေးချက် မရှိသေးပါ|ကနဦးစာရင်းဖြစ်ပြီး တကယ်မသုံးမီ တက္ကသိုလ်၏ တရားဝင်ဒေတာဖြင့် အတည်ပြုရမည်|စာရင်းဒေတာ မရှိသေးပါ|အမည်ရိုက်ပါ|စောင့်ကြည့်ရေးအမှတ် မရှိသေးပါ|ရလဒ်မတွေ့ပါ|အွန်လိုင်းရှိ အာရုံခံကိရိယာများ|အုပ်စု F|Lamduan အုပ်စု|Sakthong အုပ်စု|အမည်သီးသန့်ရှိသော အဆောင်များ|စားသောက်ဆိုင်နှင့် ရောင်းချရာနေရာများ|အဆောင်|စားသောက်ဆိုင်စင်တာ|အစားအသောက်နှင့် ယမကာ နေရာ|မီးဖိုချောင်|ရေကူးကန်အနီး အစားအစာရောင်းချရာ|မဲဖလူးလျန်တက္ကသိုလ် ဆေးရုံ စားသောက်ဆိုင်|မြစ်ကမ်းစပ်အိမ်|နိုင်ငံတကာကျောင်းသား အဆောင်|ပုံမှန်မဟုတ်သော ပြောင်းလဲမှု|ပုံမှန်တန်ဖိုး|ပုံမှန်မဟုတ်မှု ရမှတ်|သတ်မှတ်ထားသော ကန့်သတ်ချက်|လည်း သတိပေးသည်|မသတိပေးသေးပါ|စစ်ဆေးမှု အနှစ်ချုပ်|သတိပေးချက် စုစုပေါင်း|တိကျမှု (precision)|ဒေတာ မရှိသေးပါ|မြင့်တက်လာနေသည်|ကျဆင်းလာနေသည်|တည်ငြိမ်သည်|ရေနောက်ကျိမှုသည် စစ်ဆေးမှု {1} ကြိမ်အတွင်း {0} NTU ကျော်နိုင်သည်|နောက်ထပ် 12 ကြိမ်အတွင်း {0} NTU မကျော်ဟု မျှော်မှန်းသည်|နောက်ကြောင်းပြန်စစ် အမှားအယွင်း (MAE)|စမ်းသပ်မှု ထိန်းချုပ်ချက်|ခေတ္တရပ်ရန်|ဆက်ဖွင့်ရန်|ဒေတာရှင်းပြီး ပြန်စရန်|ရေနောက်ကျိမှု ပုံမှန်မဟုတ်ခြင်းကို စမ်းသပ်ရန်|ရေနောက်ကျိမှု ဖြစ်ရပ် စတင်ရန်|စမ်းသပ်နေသည်… သတိပေးချက်တက်ဘ်ကို ကြည့်ပါ|ကိုယ်တိုင်တိုင်းထားသော တန်ဖိုးထည့်ရန်|အပူချိန် (°C)|တန်ဖိုးထည့်ပြီး စစ်ဆေးရန်|ဂဏန်းအားလုံးဖြည့်ပါ- ရေနောက်ကျိမှု ≥ 0, pH 0–14|AI က ပုံမှန်မဟုတ်မှုကို တွေ့ရှိသည်၊ သတိပေးချက်တက်ဘ်ကို ကြည့်ပါ|တန်ဖိုးထည့်ပြီးပါပြီ|ရေစနစ် ပြုပြင်ခြင်း ကြေညာချက်|အနည်းဆုံး 7 ရက် ကြိုတင်ကြေညာရမည်|ထိခိုက်မည့် နေရာများ|သက်ရောက်မှု|ပြုပြင်မည့် ရက်စွဲနှင့် အချိန်|ကြေညာချက် သိမ်းရန်|နေရာ၊ သက်ရောက်မှု၊ ရက်စွဲ/အချိန် အားလုံးဖြည့်ပါ|အနည်းဆုံး 7 ရက် ကြိုတင်ရမည်၊ ရက်စွဲအသစ်ရွေးပါ|ကြေညာချက် သိမ်းပြီးပါပြီ|ကြေညာချက် မရှိသေးပါ|ပြုပြင်ခြင်း|ကြေညာသည့်အချိန်|ကြိုတင်|ရက်|ဖျက်ရန်",zh:"数字来自模拟演示点,尚无已确认的真实传感器|宿舍名册(待核实)|有监测点|已登记地点|在线监测点|需进一步检查|暂无已登记监测点,等待学校确认数据|待检查|确有问题|误报|浊度|暂无警报|初始名单,实际使用前须与学校官方数据核实|暂无名册数据|输入名称|暂无监测点|无结果|在线传感器|F组|Lamduan组|Sakthong组|特定名称宿舍|食堂及餐饮点|宿舍|食堂|餐饮区|厨房|游泳池旁餐饮点|湄法銮大学医院餐厅|河畔小屋|国际学生宿舍|异常变化|正常值|异常评分|固定阈值|同样会报警|尚未报警|核查汇总|警报总数|准确率(precision)|暂无数据|呈上升趋势|呈下降趋势|稳定|浊度可能在 {1} 次读数内超过 {0} NTU|预计未来 12 次读数内不会超过 {0} NTU|回测误差(MAE)|模拟控制|暂停|继续|清除数据并重新开始|模拟浊度异常|开始浊度事件|正在模拟…请查看警报标签|输入自测读数|水温(°C)|添加读数并检查|请填写所有数字:浊度 ≥ 0,pH 0–14|AI 检测到异常,请查看警报标签|已添加读数|供水系统施工通知|须至少提前 7 天通知|受影响地点|影响|施工日期和时间|保存通知|请填写地点、影响及日期/时间|须至少提前 7 天,请选择新的日期/时间|通知已保存|暂无通知|施工|通知于|提前|天|删除",ko:"숫자는 모의 데모 지점에서 계산한 값이며 확인된 실제 센서는 아직 없습니다|기숙사 등록부(확인 대기)|측정 지점 있음|등록된 장소|온라인 측정 지점|추가 점검 필요|등록된 측정 지점이 없으며 대학의 확인 데이터를 기다리는 중입니다|점검 필요|실제 문제|오경보|탁도|아직 알림이 없습니다|초기 목록이며 실제 사용 전 대학 공식 자료로 확인해야 합니다|아직 등록 데이터가 없습니다|이름 입력|아직 측정 지점이 없습니다|결과 없음|온라인 센서|F 그룹|Lamduan 그룹|Sakthong 그룹|고유 이름 기숙사|식당 및 음식 판매점|기숙사|푸드센터|음식·음료 구역|주방|수영장 옆 음식 판매점|매파루앙대학교 병원 식당|리버사이드 하우스|국제학생 기숙사|이상 변화|정상 값|이상 점수|고정 임계값|도 알림|아직 알림 없음|점검 요약|전체 알림|정밀도(precision)|아직 데이터 없음|상승 추세|하락 추세|안정|탁도가 {1}회 측정 이내에 {0} NTU를 넘을 수 있습니다|다음 12회 측정 내에 {0} NTU를 넘지 않을 것으로 예상됩니다|백테스트 오차(MAE)|시뮬레이션 제어|일시정지|계속|데이터 지우고 다시 시작|탁도 이상 모의|탁도 사건 시작|모의 중… 알림 탭을 확인하세요|직접 측정값 입력|수온(°C)|측정값 추가 및 확인|모든 숫자를 입력하세요: 탁도 ≥ 0, pH 0–14|AI가 이상을 감지했습니다. 알림 탭을 확인하세요|측정값을 추가했습니다|급수 시스템 작업 공지|최소 7일 전에 공지해야 합니다|영향받는 장소|영향|작업 날짜 및 시간|공지 저장|장소, 영향, 날짜/시간을 모두 입력하세요|최소 7일 전이어야 합니다. 새 날짜/시간을 선택하세요|공지를 저장했습니다|아직 공지가 없습니다|작업|공지 시각|사전|일|삭제",ja:"数値は模擬デモ地点から算出しており、確認済みの実センサーはまだありません|寮の登録簿(確認待ち)|観測地点あり|登録済みの場所|オンラインの観測地点|追加確認が必要|登録された観測地点はなく、大学の確認データを待っています|要確認|実際の問題|誤報|濁度|アラートはまだありません|初期リストです。実際に使う前に大学の公式情報で確認してください|登録データはまだありません|名前を入力|観測地点はまだありません|結果なし|オンラインのセンサー|Fグループ|Lamduanグループ|Sakthongグループ|固有名の寮|食堂・飲食提供場所|寮|フードセンター|飲食エリア|厨房|プール近くの飲食提供場所|メーファールアン大学病院レストラン|リバーサイドハウス|留学生寮|異常な変化|正常値|異常スコア|固定しきい値|でも警報|まだ警報なし|確認結果のまとめ|アラート総数|精度(precision)|データなし|上昇傾向|下降傾向|安定|濁度は{1}回の測定以内に{0} NTUを超える可能性があります|次の12回の測定で{0} NTUを超える見込みはありません|バックテスト誤差(MAE)|シミュレーション操作|一時停止|再開|データを消去して再スタート|濁度異常を模擬|濁度イベントを開始|模擬中…アラートタブを確認してください|自分で測定した値を入力|水温(°C)|値を追加して確認|すべての数値を入力してください:濁度 ≥ 0、pH 0–14|AIが異常を検知しました。アラートタブを確認してください|値を追加しました|給水システム工事のお知らせ|少なくとも7日前に告知する必要があります|影響を受ける場所|影響|工事の日時|お知らせを保存|場所、影響、日時をすべて入力してください|7日以上先の日時にしてください。新しい日時を選んでください|お知らせを保存しました|お知らせはまだありません|工事|告知日時|事前|日|削除",id:"Angka berasal dari titik demo simulasi; belum ada sensor nyata yang terkonfirmasi|Daftar asrama (menunggu verifikasi)|Dengan titik pemantauan|Lokasi terdaftar|Titik pemantauan online|Perlu pemeriksaan lanjutan|Belum ada titik pemantauan terdaftar; menunggu data terkonfirmasi dari universitas|Perlu diperiksa|Masalah nyata|Alarm palsu|Kekeruhan|Belum ada peringatan|Daftar awal; verifikasi dengan data resmi universitas sebelum digunakan|Belum ada data daftar|Ketik nama|Belum ada titik pemantauan|Tidak ada hasil|Sensor online|Grup F|Grup Lamduan|Grup Sakthong|Asrama bernama khusus|Pusat makanan & gerai makanan|Asrama|Pusat Makanan|Area makanan & minuman|Dapur|Gerai makanan dekat kolam renang|Restoran Rumah Sakit Universitas Mae Fah Luang|Rumah Tepi Sungai|Asrama mahasiswa internasional|perubahan abnormal|Nilai normal|Skor anomali|Ambang tetap|juga memberi peringatan|belum memberi peringatan|Ringkasan pemeriksaan|Total peringatan|Presisi (precision)|Belum ada data|Tren naik|Tren turun|Stabil|Kekeruhan dapat melebihi {0} NTU dalam {1} pembacaan|Diperkirakan tidak melebihi {0} NTU dalam 12 pembacaan berikutnya|Galat uji ulang (MAE)|Kontrol simulasi|Jeda|Lanjutkan|Hapus data dan mulai ulang|Simulasikan kekeruhan abnormal|Mulai kejadian kekeruhan|Mensimulasikan… lihat tab Peringatan|Masukkan pembacaan sendiri|Suhu (°C)|Tambah pembacaan dan periksa|Isi semua angka: kekeruhan ≥ 0, pH 0–14|AI mendeteksi anomali; lihat tab Peringatan|Pembacaan ditambahkan|Pemberitahuan pekerjaan sistem air|Harus diumumkan minimal 7 hari sebelumnya|Lokasi terdampak|Dampak|Tanggal dan waktu pekerjaan|Simpan pemberitahuan|Isi lokasi, dampak, dan tanggal/waktu|Minimal 7 hari ke depan; pilih tanggal/waktu baru|Pemberitahuan tersimpan|Belum ada pemberitahuan|Pekerjaan|Diumumkan|sebelumnya|hari|Hapus",km:"តួលេខគណនាពីចំណុចសាកល្បង មិនទាន់មានឧបករណ៍ចាប់សញ្ញាពិតប្រាកដដែលបានបញ្ជាក់ទេ|បញ្ជីអន្តេវាសិកដ្ឋាន (រង់ចាំផ្ទៀងផ្ទាត់)|មានចំណុចត្រួតពិនិត្យ|ទីតាំងដែលបានចុះឈ្មោះ|ចំណុចត្រួតពិនិត្យដែលនៅលើបណ្តាញ|ត្រូវពិនិត្យបន្ថែម|មិនទាន់មានចំណុចត្រួតពិនិត្យដែលបានចុះបញ្ជី កំពុងរង់ចាំទិន្នន័យដែលបានបញ្ជាក់ពីសាកលវិទ្យាល័យ|ត្រូវពិនិត្យ|បញ្ហាពិតប្រាកដ|ការជូនដំណឹងខុស|ភាពល្អក់|មិនទាន់មានការជូនដំណឹង|បញ្ជីដំបូង ត្រូវផ្ទៀងផ្ទាត់ជាមួយទិន្នន័យផ្លូវការរបស់សាកលវិទ្យាល័យមុនប្រើពិតប្រាកដ|មិនទាន់មានទិន្នន័យបញ្ជី|វាយឈ្មោះ|មិនទាន់មានចំណុចត្រួតពិនិត្យ|រកមិនឃើញ|ឧបករណ៍ចាប់សញ្ញាដែលនៅលើបណ្តាញ|ក្រុម F|ក្រុម Lamduan|ក្រុម Sakthong|អន្តេវាសិកដ្ឋានដែលមានឈ្មោះជាក់លាក់|អាហារដ្ឋាន និងកន្លែងលក់|អន្តេវាសិកដ្ឋាន|មជ្ឈមណ្ឌលអាហារ|តំបន់អាហារ និងភេសជ្ជៈ|ផ្ទះបាយ|កន្លែងលក់អាហារក្បែរអាងហែលទឹក|ភោជនីយដ្ឋានមន្ទីរពេទ្យសាកលវិទ្យាល័យមេហ្វាលួង|ផ្ទះមាត់ទន្លេ|អន្តេវាសិកដ្ឋាននិស្សិតអន្តរជាតិ|ការផ្លាស់ប្តូរមិនប្រក្រតី|តម្លៃធម្មតា|ពិន្ទុមិនប្រក្រតី|កម្រិតកំណត់ថេរ|ក៏ជូនដំណឹងដែរ|មិនទាន់ជូនដំណឹង|សង្ខេបលទ្ធផលត្រួតពិនិត្យ|ការជូនដំណឹងសរុប|ភាពត្រឹមត្រូវ (precision)|មិនទាន់មានទិន្នន័យ|និន្នាការកើនឡើង|និន្នាការថយចុះ|ស្ថិរភាព|ភាពល្អក់អាចលើស {0} NTU ក្នុងរយៈពេល {1} ដងនៃការវាស់|មិនរំពឹងថាលើស {0} NTU ក្នុង 12 ដងបន្ទាប់ទេ|កំហុសប្រៀបធៀបអតីតកាល (MAE)|ការគ្រប់គ្រងការក្លែងធ្វើ|ផ្អាកបណ្តោះអាសន្ន|បន្ត|សម្អាតទិន្នន័យ និងចាប់ផ្តើមឡើងវិញ|ក្លែងធ្វើភាពល្អក់មិនប្រក្រតី|ចាប់ផ្តើមព្រឹត្តិការណ៍ទឹកល្អក់|កំពុងក្លែងធ្វើ… សូមមើលផ្ទាំងការជូនដំណឹង|បញ្ចូលតម្លៃដែលវាស់ដោយខ្លួនឯង|សីតុណ្ហភាព (°C)|បន្ថែមតម្លៃ និងពិនិត្យ|បំពេញលេខឱ្យគ្រប់៖ ភាពល្អក់ ≥ 0, pH 0–14|AI រកឃើញភាពមិនប្រក្រតី សូមមើលផ្ទាំងការជូនដំណឹង|បានបន្ថែមតម្លៃ|សេចក្តីជូនដំណឹងអំពីការជួសជុលប្រព័ន្ធទឹក|ត្រូវជូនដំណឹងជាមុនយ៉ាងតិច 7 ថ្ងៃ|ទីតាំងដែលរងផលប៉ះពាល់|ផលប៉ះពាល់|កាលបរិច្ឆេទ និងពេលវេលាជួសជុល|រក្សាទុកសេចក្តីជូនដំណឹង|បំពេញទីតាំង ផលប៉ះពាល់ និងកាលបរិច្ឆេទ/ម៉ោងឱ្យគ្រប់|ត្រូវជូនដំណឹងជាមុនយ៉ាងតិច 7 ថ្ងៃ សូមជ្រើសរើសកាលបរិច្ឆេទថ្មី|បានរក្សាទុកសេចក្តីជូនដំណឹង|មិនទាន់មានសេចក្តីជូនដំណឹង|ការជួសជុល|ជូនដំណឹងនៅ|ជាមុន|ថ្ងៃ|លុប"};
+Object.keys(I2).forEach(k=>{I[k]=I[k].concat(I2[k].split('|'))});
+
+const t=k=>{const i=K.indexOf(k);return (I[S.lang]||I.th)[i]||I.th[i];};
+const esc=x=>x.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let N=[];const saveN=()=>{try{localStorage.setItem('aquacare.notices',JSON.stringify(N))}catch(e){}};
+function ptSel(p){const o=c=>R.filter(x=>x.c===c).map(x=>`<option value="${x.n}">${dn(x.n)}</option>`).join('');return `<label for="${p}Loc">${t('loc')}</label><select id="${p}Loc"><optgroup label="${CATS.dorm.n}">${o('dorm')}</optgroup><optgroup label="${CATS.food.n}">${o('food')}</optgroup></select><div id="${p}FlW"><label for="${p}Fl">${t('rest')}</label><select id="${p}Fl">${[1,2,3,4].map(i=>`<option>${i}</option>`).join('')}</select></div>`;}
+const pid=p=>{const loc=$(p+'Loc').value,fl=+$(p+'Fl').value;return PTS.find(x=>x.loc===loc&&(!x.fl||x.fl===fl)).id;};
+const CEN='ระบบน้ำส่วนกลาง';
+const nn=n=>n===CEN?t('central'):dn(n);
+function ntHTML(){const L=[...R.map(x=>x.n),CEN];return `<div class="card"><h2>${t('ntT')}</h2><p class="mute" style="margin:0">${t('nt7')}</p><label>${t('ntL')}</label><div id="ntLocs" style="max-height:170px;overflow:auto;border:1px solid var(--line);border-radius:10px;padding:6px 10px">${L.map(n=>`<label style="display:flex;gap:8px;align-items:center;margin:0;padding:4px 0;color:var(--ink)"><input type="checkbox" value="${n}" style="width:22px;min-height:22px">${nn(n)}</label>`).join('')}</div><label for="ntImp">${t('ntI')}</label><textarea id="ntImp" rows="2" style="width:100%;border-radius:10px;border:1px solid var(--line);background:var(--bg);padding:8px 12px;font:inherit;color:inherit"></textarea><label for="ntDt">${t('ntD')}</label><input id="ntDt" type="datetime-local"><div class="btns" style="margin-top:12px"><button class="btn" data-a="nt">${t('ntS')}</button></div><p id="ntMsg" class="mute" role="status" aria-live="polite" style="margin:8px 0 0"></p><div id="ntList"></div></div><div id="al" style="display:flex;flex-direction:column;gap:12px"></div>`;}
+function renderN(){const f=(d,o)=>new Date(d).toLocaleString(lc(),o);$('ntList').innerHTML=N.map(n=>`<div class="row2" style="align-items:flex-start"><div><b>${n.locs.map(nn).join(', ')}</b><br>${t('ntI')}: ${esc(n.imp)}<br><span class="mute">${t('work')}: ${f(n.when,{dateStyle:'long',timeStyle:'short'})} · ${t('annAt')} ${f(n.at,{dateStyle:'medium',timeStyle:'short'})} · ${t('ahead')} ${Math.floor((n.when-n.at)/864e5)} ${t('days')}</span></div><button class="chip" style="flex:none;padding:0 12px" data-a="ntdel" data-v="${n.uid}">${t('del')}</button></div>`).join('')||`<p class="mute" style="margin:8px 0 0">${t('noN')}</p>`;}
+function applyLang(){
+  document.querySelectorAll('[data-i]').forEach(e=>{e.textContent=t(e.dataset.i);});
+  document.documentElement.lang=S.lang;$('lang').value=S.lang;
+  [['inj','injBox'],['mp','mpBox'],['fc','fcBox']].forEach(([p,b])=>{const l=$(p+'Loc'),f=$(p+'Fl');if(!l)return;const lv=l.value,fv=f.value;$(b).innerHTML=ptSel(p);$(p+'Loc').value=lv;$(p+'Fl').value=fv;$(p+'FlW').hidden=R.find(x=>x.n===lv).c!=='dorm';});
+  $('p-alerts').innerHTML=ntHTML();renderN();render();}
+function setup(){try{S.lang=localStorage.getItem('aquacare.lang')||'th';N=JSON.parse(localStorage.getItem('aquacare.notices')||'[]')}catch(e){}
+$('injBox').innerHTML=ptSel('inj');$('mpBox').innerHTML=ptSel('mp');$('p-fc').innerHTML='<div class="card" id="fcBox">'+ptSel('fc')+'</div><div id="fcBody" style="display:flex;flex-direction:column;gap:12px"></div>';}
+const GK={'กลุ่ม F':'gF','กลุ่มลำดวน':'gL','กลุ่มสักทอง':'gS','หอพักชื่อเฉพาะ':'gN','ศูนย์อาหารและจุดจำหน่าย':'gFd'};
+const gn=g=>t(GK[g]);
+const NM={'หอพักประเสริฐฯ':['wDm','Prasert'],'หอพักบุญทรงฯ':['wDm','Boonsong'],'หอพัก พล.ต.อ.เภาฯ':['wDm','Pol.Gen. Phao'],'ครัวลำดวน':['wKit','Lamduan'],'ครัวมายมัม':['wKit','My Mum']};
+const NK={'จุดจำหน่ายอาหารบริเวณสระว่ายน้ำ':'wPool','ห้องอาหารโรงพยาบาลมหาวิทยาลัยแม่ฟ้าหลวง':'wHosp','เรือนริมน้ำ':'wRiver','หอพักนักศึกษานานาชาติ':'wIntl'};
+function dn(n){if(S.lang==='th')return n;let m;
+ if(m=/^(ลำดวน|สักทอง) (\d)$/.exec(n))return(m[1]==='ลำดวน'?'Lamduan ':'Sakthong ')+m[2];
+ if(m=/^ศูนย์อาหาร (.+)$/.exec(n))return t('wFc')+' '+m[1];
+ if(m=/^พื้นที่จำหน่ายอาหารและเครื่องดื่ม (.+)$/.exec(n))return t('wFb')+' '+m[1];
+ if(NM[n])return t(NM[n][0])+' '+NM[n][1];
+ return NK[n]?t(NK[n]):n;}
+const stale=p=>Date.now()-S.data[p.id].slice(-1)[0].t>10000;
+function locs(c){return R.filter(x=>x.c===c).map(x=>{const ps=PTS.filter(p=>p.loc===x.n);return{...x,ps,st:ps.length?(ps.some(p=>status(p.id).c==='bad')?'bad':ps.some(p=>status(p.id).c==='warn')?'warn':'ok'):null};});}
+function spark(v){const mx=Math.max(...v)*1.1,n=v.length;return `<svg viewBox="0 0 300 60" role="img" aria-label="${t('trend')}"><polyline class="ln" points="${v.map((y,i)=>(i*300/(n-1)).toFixed(1)+','+(58-y/mx*54).toFixed(1)).join(' ')}"/></svg>`;}
+function homeHTML(){
+  const d=locs('dorm'),f=locs('food'),w=[...d,...f].filter(x=>x.ps.length),dw=d.filter(x=>x.ps.length),fw=f.filter(x=>x.ps.length);
+  const cnt=s=>w.filter(x=>x.st===s).length,off=PTS.filter(stale).length,last=Math.max(...PTS.map(p=>S.data[p.id].slice(-1)[0].t));
+  const k=(l,v,c)=>`<div class="card k"><small>${l}</small><b class="${c||''}">${v}</b></div>`;
+  const m=(l,v)=>`<div class="row2"><span class="mute">${l}</span><b>${v}</b></div>`;
+  const cat=(c,body)=>`<div class="card"><h2>${CATS[c].n}</h2>${body}<div class="btns" style="margin-top:12px"><button class="btn alt" data-a="tab" data-v="${c}">${t('detail')}</button></div></div>`;
+  const recent=S.alerts.slice(0,3).map(a=>`<div class="row2"><span>${a.kind==='turb'?t('turb'):'pH'} · ${PTS.find(p=>p.id===a.id).n}<br><span class="mute">${clock(a.t)}</span></span><span class="badge ${a.status==='open'?'bad':''}">${a.status==='open'?t('aOpen'):a.status==='confirmed'?t('aReal'):t('aFalse')}</span></div>`).join('')||'<p class="mute" style="margin:6px 0 0">'+t('noAl')+'</p>';
+  return `<div class="card" style="border-left:6px solid var(--gold)"><span class="demo">${t('demo')}</span> <span class="mute">${t('note')}</span></div>
+<div class="g">${k(t('kPlaces'),w.length)}${k(t('ok'),cnt('ok'),'ok')}${k(t('warn'),cnt('warn'),'warn')}${k(t('bad'),cnt('bad'),'bad')}${k(t('kOff'),off)}${k(t('kLast'),clock(last))}</div>
+<div class="g w">${cat('dorm',m(t('rDorm'),d.length)+m(t('hasPts'),dw.length)+m(t('ok'),dw.filter(x=>x.st==='ok').length)+m(t('warn'),dw.filter(x=>x.st!=='ok').length))}${cat('food',m(t('rFood'),f.length)+m(t('onl'),fw.filter(x=>x.ps.some(p=>!stale(p))).length)+m(t('chk'),fw.filter(x=>x.st!=='ok').length))}${cat('central','<p class="mute" style="margin:6px 0 0">'+t('cNone')+'</p>')}</div>
+<div class="g w"><div class="card"><div class="top"><h2 style="margin:0">${t('recent')}</h2><button class="chip" style="flex:none;padding:0 14px" data-a="tab" data-v="alerts">${t('all')}</button></div>${recent}</div><div class="card"><h2>${t('trend')}</h2>${spark(S.data[PTS[0].id].map(r=>r.turb).slice(-40))}<p class="mute" style="margin:6px 0 0">${PTS[0].n} · ${t('demo')}</p></div></div>`;
+}
+function listShell(c){return `<div class="card"><h2>${CATS[c].n}</h2><p class="mute" style="margin:0">${c==='central'?t('noReg'):t('listNote')}</p><label for="q">${t('search')}</label><input id="q" type="search" placeholder="${t('phName')}"></div><div id="rows" class="g w"></div>`;}
+function rowsHTML(c,q){
+  const l=locs(c).filter(x=>(dn(x.n)+gn(x.g)).toLowerCase().includes(q.trim().toLowerCase()));
+  if(!l.length)return `<div class="card"><b>${c==='central'?t('noPt'):t('noItem')}</b></div>`;
+  return l.map(x=>{const det=c==='food'?'':x.ps.map(p=>`<div class="row2"><span>${p.n}</span><span class="st ${status(p.id).c}">${LBL[status(p.id).c]}</span></div>`).join('');return `<div class="card"><div class="top"><b>${dn(x.n)}</b>${x.st?`<span class="st ${x.st}">${LBL[x.st]}</span>`:''}</div><div class="mute">${gn(x.g)} · ${t('sOn')} ${x.ps.filter(p=>!stale(p)).length}/${x.ps.length}</div><span class="demo">${t('demo')}</span>${det}</div>`;}).join('');
+}
+function alertsHTML(){
+  const c=S.alerts.filter(a=>a.status==='confirmed').length,f=S.alerts.filter(a=>a.status==='false').length;
+  const prec=c+f?Math.round(100*c/(c+f))+'%':t('noData');
+  let h=`<div class="card"><h2>${t('sum')}</h2><div class="row"><div class="m"><small>${t('total')}</small><b>${S.alerts.length}</b></div><div class="m"><small>${t('aReal')}</small><b>${c}</b></div><div class="m"><small>${t('aFalse')}</small><b>${f}</b></div></div><p class="mute" style="margin:8px 0 0">${t('prec')}: <b>${prec}</b></p></div>`;
+  if(!S.alerts.length)h+=`<div class="card"><b>${t('noAl')}</b></div>`;
+  S.alerts.forEach(a=>{
+    const pn=PTS.find(p=>p.id===a.id).n,k=a.kind==='turb'?t('turb'):'pH',u=a.kind==='turb'?' NTU':'';
+    const res=a.status==='confirmed'?`<span class="badge">${t('aReal')}</span>`:a.status==='false'?`<span class="badge">${t('aFalse')}</span>`:`<span class="badge bad">${t('aOpen')}</span>`;
+    h+=`<div class="card alert ${a.status==='open'?'open':'done'}"><div class="top"><b>${k} ${t('abn')}</b>${res}</div><div class="mute">${pn} · ${clock(a.t)}</div><p style="margin:8px 0">${t('nv')} ${a.from.toFixed(2)} → ${a.to.toFixed(2)}${u} (${t('score')} ${a.score.toFixed(2)})</p><p class="mute" style="margin:0">${t('fixed')} ${TH} NTU: <b>${a.fixed?t('fyes'):t('fno')}</b></p>${a.status==='open'?`<div class="btns" style="margin-top:12px"><button class="btn" data-a="done" data-v="${a.uid}" data-r="confirmed">${t('aReal')}</button><button class="btn alt" data-a="done" data-v="${a.uid}" data-r="false">${t('aFalse')}</button></div>`:''}</div>`;
+  });
+  return h;
+}
+function fcHTML(){
+  const id=pid('fc'),p=PTS.find(x=>x.id===id),v=S.data[id].map(r=>r.turb).slice(-40),f=forecast(id);
+  const trend=f.slope>0.03?`<span class="warn">${t('up')}</span>`:f.slope<-0.03?`<span class="ok">${t('down')}</span>`:`<span class="ok">${t('flat')}</span>`;
+  const eta=f.eta?t('etaY').replace('{0}',TH).replace('{1}',f.eta):t('etaN').replace('{0}',TH);
+  return `<div class="card"><h2>${p.n}</h2>${chart(v,f.pred)}</div><div class="card"><div class="big">${trend}</div><p style="margin:4px 0">${eta}</p><p class="mute" style="margin:0">${t('mae')}: <b>${f.mae==null?'—':f.mae.toFixed(2)+' NTU'}</b> · ${t('demo')}</p></div>`;
+}
+function render(){
+  const open=Object.values(S.open).filter(Boolean).length;
+  $('dot').hidden=!open;$('dot').textContent=open;
+  if(S.tab==='home')$('p-home').innerHTML=homeHTML();
+  if(CATS[S.tab]){if(S.listFor!==S.tab||!$('rows')){$('p-list').innerHTML=listShell(S.tab);S.listFor=S.tab;}$('rows').innerHTML=rowsHTML(S.tab,$('q').value);}
+  if(S.tab==='alerts')$('al').innerHTML=alertsHTML();
+  if(S.tab==='fc')$('fcBody').innerHTML=fcHTML();
+}
+function init(){
+  S.tick=0;S.data={};S.open={};S.calm={};S.boost={};S.mute={};S.z={};
+  PTS.forEach(p=>{S.data[p.id]=[];for(let k=0;k<40;k++)S.data[p.id].push(gen(p.id,k));S.tick=40;});
+}
+function msg(t){$('msg').textContent=t;}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-a]');if(!b)return;
+  const a=b.dataset.a,v=b.dataset.v;
+  if(a==='tab'){S.tab=v;const sec=CATS[v]?'list':v;['home','list','alerts','fc','lab'].forEach(t=>{$('p-'+t).hidden=t!==sec;});document.querySelectorAll('nav button').forEach(n=>n.setAttribute('aria-current',n.dataset.v===v?'page':'false'));window.scrollTo(0,0);}
+  if(a==='sel')S.sel=v;
+  if(a==='done'){const al=S.alerts.find(x=>x.uid===v);if(al){al.status=b.dataset.r;S.open[al.id]=null;S.mute[al.id]=S.tick+8;save();}}
+  if(a==='play'){S.play=!S.play;b.dataset.i=S.play?'pause':'resume';b.textContent=t(b.dataset.i);}
+  if(a==='inj'){const q=pid('inj');S.boost[q]=10;S.mute[q]=0;b.textContent=t('injing');setTimeout(()=>{b.textContent=t('injB');},4000);}
+  if(a==='add'){
+    const id=pid('mp'),t=parseFloat($('mt').value),p=parseFloat($('mph').value),c=parseFloat($('mtemp').value);
+    if([t,p,c].some(isNaN)||t<0||p<0||p>14){msg(t('m1'));return;}
+    const before=S.alerts.length;addReading(id,{t:Date.now(),turb:t,ph:p,tp:c});
+    msg(S.alerts.length>before?t('m2'):t('m3'));
+  }
+  if(a==='nt'){const ls=[...document.querySelectorAll('#ntLocs input:checked')].map(i=>i.value),imp=$('ntImp').value.trim(),when=new Date($('ntDt').value).getTime();
+    if(!ls.length||!imp||isNaN(when)){$('ntMsg').textContent=t('e1');return;}
+    if(when<Date.now()+7*864e5){$('ntMsg').textContent=t('e2');return;}
+    N.unshift({uid:''+Date.now(),locs:ls,imp,when,at:Date.now()});saveN();$('ntMsg').textContent=t('saved');$('ntImp').value='';renderN();return;}
+  if(a==='ntdel'){N=N.filter(n=>n.uid!==v);saveN();renderN();return;}
+  if(a==='reset'){S.alerts=[];save();init();msg('');}
+  render();
+});
+document.addEventListener('input',e=>{if(e.target.id==='q')render();});
+document.addEventListener('change',e=>{const m=/^(\w+)Loc$/.exec(e.target.id);if(m){$(m[1]+'FlW').hidden=R.find(x=>x.n===e.target.value).c!=='dorm';}if(e.target.id==='lang'){S.lang=e.target.value;try{localStorage.setItem('aquacare.lang',S.lang)}catch(_){}applyLang();}render();});
+S.alerts=load().filter(a=>PTS.some(p=>p.id===a.id));init();
+S.alerts.forEach(a=>{if(a.status==='open')S.open[a.id]=a.uid;});
+setup();applyLang();
+setInterval(()=>{if(!S.play)return;S.tick++;PTS.forEach(p=>addReading(p.id,gen(p.id,S.tick)));render();},2000);
+</script>
+</body>
+</html>
